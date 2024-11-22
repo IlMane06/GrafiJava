@@ -1,20 +1,16 @@
-import java.io.*;
-import java.net.*;
+import java.util.*;
 
-public static void main(String[] args) throws IOException {
-    ServerSocket serverSocket = new ServerSocket(12345);
-    Socket clientSocket = serverSocket.accept();
+public static void main(String args[]) {
+    Grafo g = new Grafo(4);
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(2, 3);
+    g.addEdge(3, 3);
 
-    BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-    PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+    System.out.println("Following is Breadth First Traversal "+
+            "(starting from vertex 2)");
 
-    String request = in.readLine();
-    System.out.println("Ricevuto dal client: " + request);
-
-    out.println("Ciao dal server!");
-
-    in.close();
-    out.close();
-    clientSocket.close();
-    serverSocket.close();
+    g.BFS(2);
 }
